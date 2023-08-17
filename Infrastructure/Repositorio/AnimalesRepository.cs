@@ -12,27 +12,27 @@ namespace Infrastructure.Repositorio
 {
     public class AnimalesRepository : IAnimalesRepository
     {
-        ANIMALESContext c;
-        public AnimalesRepository(ANIMALESContext _c)
+        ANIMALESContext _c;
+        public AnimalesRepository(ANIMALESContext c)
         {
             _c = c;
         }
         public bool AddAnimal(AnimalDTO animal)
         {
-            Animale obj = new Animale
-            {
-                Animalid = animal.Animalid,
-                Birthdate = animal.Birthdate,
-                Breed = animal.Breed,
-                Name = animal.Name,
-                Price = animal.Price,
-                Sex = animal.Sex,
-                Status = animal.Status,
-            };
+            Animale obj = new Animale();
+            
+                obj.Animalid = animal.Animalid;
+                obj.Birthdate = animal.Birthdate;
+                obj.Breed = animal.Breed;
+                obj.Name = animal.Name;
+                obj.Price = animal.Price;
+                obj.Sex = animal.Sex;
+                obj.Status = animal.Status;
+            
             try
             {
-                c.Animales.Add(obj);
-                var rows = c.SaveChanges();
+                _c.Animales.Add(obj);
+                var rows = _c.SaveChanges();
                 bool result = (rows > 0);
                 return result;
             }
@@ -46,14 +46,14 @@ namespace Infrastructure.Repositorio
         {
             try
             {
-                var todelete = c.Animales.First(e =>e.Animalid == animal);
+                var todelete = _c.Animales.First(e =>e.Animalid == animal);
                 if (todelete != null)
                 {
-                    c.Animales.Remove(todelete);
+                    _c.Animales.Remove(todelete);
                 }else{
                     return false;
                 }
-                var rows = c.SaveChanges();
+                var rows = _c.SaveChanges();
                 bool result = (rows > 0);
                 return result;
             }
@@ -68,7 +68,7 @@ namespace Infrastructure.Repositorio
             
             try
             {
-                var result = c.Animales.First(e => e.Animalid == id);
+                var result = _c.Animales.First(e => e.Animalid == id);
                 AnimalDTO obj = new AnimalDTO
                 {
                     Animalid = result.Animalid,
@@ -101,8 +101,8 @@ namespace Infrastructure.Repositorio
             };
             try
             {
-                c.Animales.Add(obj);
-                var rows = c.SaveChanges();
+                _c.Animales.Add(obj);
+                var rows = _c.SaveChanges();
                 bool result = (rows > 0);
                 return result;
             }

@@ -23,23 +23,18 @@ namespace Infrastructure.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-
-            }
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Animale>(entity =>
             {
-                entity.HasNoKey();
+                entity.HasKey(e => e.Animalid);
 
                 entity.ToTable("ANIMALES");
 
-                entity.Property(e => e.Animalid)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("ANIMALID");
+                entity.Property(e => e.Animalid).HasColumnName("ANIMALID");
 
                 entity.Property(e => e.Birthdate)
                     .HasColumnType("date")

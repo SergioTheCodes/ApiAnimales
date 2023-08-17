@@ -16,12 +16,12 @@ namespace AnimalsAPI.Controllers
         }
 
         [HttpGet]
-        [Route("GetAnimal")]
+        [Route("GetAnimal/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AnimalDTO))]
-        public async Task<IResult> GetAnimal(int animal)
+        public async Task<IResult> GetAnimal(int id)
         {
 
-            var result = _service.GetAnimal(animal);
+            var result = _service.GetAnimal(id);
             return result == null ? Results.NoContent() : Results.Ok(result);
 
         }
