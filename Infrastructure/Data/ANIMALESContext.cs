@@ -19,6 +19,7 @@ namespace Infrastructure.Data
         public virtual DbSet<Animale> Animales { get; set; } = null!;
         public virtual DbSet<Catergorium> Catergoria { get; set; } = null!;
         public virtual DbSet<Licitacion> Licitacions { get; set; } = null!;
+        public virtual DbSet<Orden> Ordens { get; set; } = null!;
         public virtual DbSet<ResponsableLicitacion> ResponsableLicitacions { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -95,6 +96,17 @@ namespace Infrastructure.Data
                     .HasForeignKey(d => d.IdResponsable)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_LICITACION_RESPONSABLE_LICITACION");
+            });
+
+            modelBuilder.Entity<Orden>(entity =>
+            {
+                entity.ToTable("ORDEN");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("ID");
+
+                entity.Property(e => e.Total).HasColumnName("TOTAL");
             });
 
             modelBuilder.Entity<ResponsableLicitacion>(entity =>

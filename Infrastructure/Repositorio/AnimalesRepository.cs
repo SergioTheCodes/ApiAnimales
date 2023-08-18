@@ -1,4 +1,5 @@
 ﻿using Domain.DTO.Animal;
+using Domain.DTO.Order;
 using Infrastructure.Data;
 using Infrastructure.Repositorio.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -32,6 +33,26 @@ namespace Infrastructure.Repositorio
             try
             {
                 _c.Animales.Add(obj);
+                var rows = _c.SaveChanges();
+                bool result = (rows > 0);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool CreateOrder(OrderResult dto)
+        {
+            Orden obj = new Orden();
+
+            obj.Id = dto.Id;
+            obj.Total = dto.MontoTotal;
+
+            try
+            {
+                _c.Ordens.Add(obj);
                 var rows = _c.SaveChanges();
                 bool result = (rows > 0);
                 return result;

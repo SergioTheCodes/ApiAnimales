@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.Repositorio.Interfaces;
 using Services.Services.Interfaces;
+using Domain.DTO.Order;
+using Infrastructure.Data;
 
 namespace Services.Services
 {
@@ -23,6 +25,19 @@ namespace Services.Services
             try
             {
                 var result = _repo.AddAnimal(animal);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool CreateOrder(OrderResult dto)
+        {
+            try
+            {
+                var result = _repo.CreateOrder(dto);
                 return result;
             }
             catch (Exception ex)

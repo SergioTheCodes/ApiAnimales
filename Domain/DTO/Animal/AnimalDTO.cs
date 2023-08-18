@@ -15,5 +15,6 @@ namespace Domain.DTO.Animal
         public string Sex { get; set; }
         public int Price { get; set; }
         public string Status { get; set; }
+        public int Quantity { get; set; }
     }
 }
